@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if session[:name].nil? && params[:name] != "" && !params[:name].nil?
+    unless params[:name].nil? || params[:name] == ""
       session[:name] = params[:name]
       redirect_to controller: 'application', action: 'hello'
     else
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:name] = nil
-    redirect_to controller: 'application', action: 'hello'
+    redirect_to '/login'
   end
 
 end
