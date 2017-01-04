@@ -1,27 +1,20 @@
 class SessionsController < ApplicationController
 
   def new
-    @user = session[:name]
   end
 
   def create
-    if session[:name].nil? || session[:name] == ""
-      @user = params[:name]
-      if @user
-        session[:name] = @user
-      else
-        flash[:notice] = 'Username was not entered'
-      end
-      redirect_to login_path
+    if session[:name].nil? && params[:name] != "" && !params[:name].nil?
+      session[:name] = params[:name]
+      redirect_to controller: 'application', action: 'hello'
     else
-      redirect_to '/'
+      redirect_to '/login'
     end
   end
 
   def destroy
     session[:name] = nil
-    flash[:notice] = 'Logged out!'
-    redirect_to login_path
+    redirect_to controller: 'application', action: 'hello'
   end
 
 end

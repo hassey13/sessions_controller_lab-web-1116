@@ -1,12 +1,4 @@
-<% if @user.nil? || @user == "" %>
-
-  <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
+<%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
     <input name=name>
     <input type=submit value='login'>
   <% end %>
-
-<% else %>
-  <h1>hi, <%= @user %></h1>
-  <%= link_to "logout", logout_path %>
-
-<% end %>
